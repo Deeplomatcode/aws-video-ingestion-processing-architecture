@@ -1,85 +1,96 @@
 # Secure Video Ingestion & Processing Pipeline on AWS
 
+A secure, scalable AWS reference architecture for ingesting video uploads, orchestrating serverless processing workflows, enriching metadata, and notifying stakeholders upon completion.
+
+This design demonstrates event-driven architecture, least-privilege IAM implementation, private subnet isolation, and production-oriented cloud design principles.
+
+---
+
 ## Overview
 
-This repository documents a secure, scalable AWS architecture for ingesting video uploads, processing content via serverless workflows, enriching metadata, and notifying stakeholders upon completion.
+This repository documents a cloud-native media ingestion and processing pipeline built using AWS managed services.
 
-The design emphasizes:
-- Event-driven processing
-- Least-privilege IAM
-- Private subnet isolation
-- Production-oriented AWS architecture patterns
+The architecture is designed to:
+
+- Scale automatically with upload volume  
+- Isolate data services within private subnets  
+- Enforce strict IAM role boundaries  
+- Provide operational visibility via event notifications  
+- Support resilient, production-grade workloads  
 
 ---
 
 ## Architecture Diagram
 
-![Video Ingestion Architecture](Video%20Streaming%20Company.png)
+![Video Ingestion Architecture](diagrams/video-streaming-architecture.png)
+
 ---
 
 ## Problem Statement
 
-Content producers upload video files that must be validated, processed, and indexed before being delivered to viewers. The system must:
+Content producers upload large video files that must be validated, processed, enriched with metadata, and indexed before distribution.
 
-- Handle large file uploads
-- Scale automatically
-- Keep data services private
-- Provide operational notifications
-- Maintain strong security boundaries
+The system must:
+
+- Handle high-volume uploads  
+- Remain secure by default  
+- Scale without infrastructure management  
+- Maintain strong operational controls  
+- Protect internal persistence layers  
 
 ---
 
 ## High-Level Flow
 
-1. Producers upload videos to an **Amazon S3 ingestion bucket**
-2. An S3 event triggers a serverless workflow
-3. A workflow/state machine coordinates **AWS Lambda functions** for:
-   - File validation
-   - Metadata extraction
-   - Processing logic
-4. Processed content is stored in output S3 buckets
-5. Metadata is written to **Amazon Aurora (private subnet)**
-6. **Amazon SNS** notifies administrators when processing completes
+1. Producers upload video assets to an **Amazon S3 ingestion bucket**
+2. S3 event notifications trigger a serverless orchestration workflow
+3. A state machine coordinates **AWS Lambda functions** responsible for:
+   - File validation  
+   - Metadata extraction  
+   - Processing and enrichment logic  
+4. Processed artifacts are stored in output S3 buckets
+5. Metadata is persisted to **Amazon Aurora (deployed in private subnets)**
+6. **Amazon SNS** publishes completion or failure notifications
 
 ---
 
 ## Core AWS Services
 
-- Amazon S3
-- AWS Lambda
-- Workflow Orchestration (State Machine Pattern)
-- Amazon Aurora (RDS)
-- Amazon SNS
-- IAM (least-privilege role design)
-- VPC (private subnet isolation)
+- **Amazon S3** – Ingestion and object storage  
+- **AWS Lambda** – Stateless compute for processing tasks  
+- **Workflow Orchestration (State Machine Pattern)** – Coordinated execution  
+- **Amazon Aurora (RDS)** – Private metadata persistence layer  
+- **Amazon SNS** – Operational notifications  
+- **IAM** – Least-privilege role enforcement  
+- **Amazon VPC** – Network isolation and private subnet architecture  
 
 ---
 
 ## Architectural Characteristics
 
-### Security
-- Least-privilege IAM policies
-- Private subnet database isolation
-- Separation of ingestion and processing roles
+### Security-by-Design
+- Strict least-privilege IAM policies  
+- Database isolation within private subnets  
+- Clear separation between ingestion and processing roles  
 
 ### Scalability
-- Event-driven compute
-- Stateless Lambda execution
-- Automatic horizontal scaling
+- Event-driven compute model  
+- Stateless Lambda execution  
+- Automatic horizontal scaling based on upload demand  
 
 ### Reliability
-- Retry-capable orchestration
-- Decoupled service design
-- Notification-based operational awareness
+- Retry-capable orchestration  
+- Decoupled service interactions  
+- Notification-driven operational awareness  
 
 ---
 
 ## Use Cases
 
-- Media platforms
-- Internal training portals
-- SaaS video features
-- Content ingestion pipelines
+- Media streaming platforms  
+- Enterprise training systems  
+- SaaS video feature pipelines  
+- Content ingestion backends  
 
 ---
 
