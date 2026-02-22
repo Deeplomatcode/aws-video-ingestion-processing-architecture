@@ -82,7 +82,38 @@ The system must:
 - Retry-capable orchestration  
 - Decoupled service interactions  
 - Notification-driven operational awareness  
+---
 
+## Future Enhancements
+
+To further strengthen production readiness, the following enhancements can be implemented:
+
+### Cost Optimization
+- Apply **S3 lifecycle policies** to transition older video assets to lower-cost storage tiers (e.g., S3 Standard-IA or Glacier).
+- Implement object compression strategies where applicable.
+- Use storage tiering for processed artifacts based on access patterns.
+- Introduce cost monitoring and budget alerts via AWS Cost Explorer and Budgets.
+
+### Failure Handling & Resilience
+- Configure **Dead-Letter Queues (DLQs)** for Lambda functions to capture failed executions.
+- Add retry and exponential backoff strategies within orchestration workflows.
+- Implement structured error logging for improved observability and debugging.
+
+### Observability & Monitoring
+- Enable centralized logging and metrics collection.
+- Add alarms for failed processing events or workflow timeouts.
+- Track ingestion throughput and processing latency metrics.
+
+### Security Enhancements
+- Enforce bucket policies with stricter upload validation rules.
+- Enable encryption at rest (S3 + Aurora) and enforce TLS in transit.
+- Add audit logging for ingestion and metadata access events.
+
+### Distribution Layer (Optional)
+- Introduce a secure content delivery tier for video playback.
+- Implement signed URL or token-based access control mechanisms.
+
+---
 ---
 
 ## Use Cases
