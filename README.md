@@ -14,8 +14,7 @@ The design emphasizes:
 
 ## Architecture Diagram
 
-![Video Ingestion Architecture](diagrams/video-streaming-architecture.png)
-
+![Video Ingestion Architecture](Video%20Streaming%20Company.png)
 ---
 
 ## Problem Statement
